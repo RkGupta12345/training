@@ -1,0 +1,4 @@
+export PATH=$PATH:/Users/abdulmunnaf/Desktop/softwares/mongo3.6/bin
+export PATH=$PATH:/Users/abdulmunnaf/Desktop/softwares/apache-cassandra-3.11.2/bin 
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+          
