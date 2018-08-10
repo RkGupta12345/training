@@ -1,0 +1,120 @@
+export PATH=$PATH:/Users/ravi.kumar/Documents/softwares\ for\ training/apache-cassandra-3.11.2/bin  
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
+insert into notebook(id,title,description)values(2,'Title Two','Title Description2');
+insert into notebook(id,title,description)values(3,'Title Three','Title Description3');
+insert into notebook(id,title,description)values(4,'Title Four','Title Description4');
+insert into notebook(id,title,description)values(5,'Title Five','Title Description5');
+insert into notebook(id,title,description)values(6,'Title Six','Title Description6');
+insert into notebook(id,title,description)values(7,'Title Seven','Title Description7');
+insert into notebook(id,title,description)values(8,'Title Eight','Title Description8');
+insert into notebook(id,title,description)values(9,'Title Nine','Title Description9');
+insert into notebook(id,title,description)values(10,'Title Ten','Title Description10');
+insert into notebook(id,title,description)values(1,'Title One','Title Description');
+
+create keyspace notebooks WITH replication = {'class': 'SimpleStrategy','replication_factor':1};
+
+
+use notebooks;
+create table notebook(
+             ... id int,
+             ... title text,
+             ... description text,
+             ... primary key(id));
+             
+  describe notebook;
+  
+   select * from notebook limit 5; 
+   
+  create keyspace video WITH replication = {'class': 'SimpleStrategy','replication_factor':1}; 
+   
+   use video;
+   create table videos(
+             video_id timeuuid,
+             added_date timestamp,
+             description text,
+             title text,
+             user_id uuid,
+             primary key(video_id)); 
+             
+  Open another terminal then give the path of videos. csv folder                
+             
+  to export csv file==>COPY videos FROM 'videos.csv' WITH HEADER=true;  
+  
+  
+  create table videosByYear(
+   title text,
+    added_year int,
+     added_date timestamp,
+     description text,
+      user_id uuid,
+      video_id timeuuid,
+            primary key((title,added_year)));  
+            
+ COPY videosByYear FROM 'videos_by_title_year.csv' WITH HEADER=true;                
+ 
+ 
+ create table videos_by_tag_year(
+   tag text,
+    added_year int,
+     added_date timestamp,
+     title text,
+     description text,
+      user_id uuid,
+      video_id timeuuid,
+            primary key((tag),added_year,video_id)); 
+            
+            
+            
+COPY videos_by_tag_year(tag,added_year,video_id, added_date,description,title,user_id) FROM 'videos_by_tag_year.csv' WITH HEADER=true; 
+
+
+
+ create table videos_by_tag_year(
+   tag text,
+    added_year int,
+     added_date timestamp,
+     title text,
+     description text,
+      user_id uuid,
+      video_id timeuuid,
+            primary key((tag),added_year,video_id)
+            with clustering order by(added_year desc));  
+            
+            
+   create table notebook1(
+              id int,
+              title set<text>,
+              description text,
+              primary key(id));  
+              
+              
+ insert into notebook1(id,title,description)values(2,{'Title Two','Title Three'},'Title Description2');
+ 
+ for list put square bracket==>[]
+ 
+ INSERT INTO employee (id, email, name)     
+VALUES(1, {'ajeetraj4u@gmail.com'}, 'Ajeet');
+
+/////// UDT User DESIGNED TYPE//////////////	
+create type name(
+ firstname text,
+ secondname text);
+ 
+ create table person(
+ id int,
+ name frozen <name>,
+ primary key(id));              
+                    
+INSERT INTO person (id,  name) VALUES(1,{firstname:'Ravi',secondname:'kumar'}); 
+
+COPY videos FROM 'videos.csv' WITH HEADER=true;  
+select count(*) from videos;
+
+////// Answer////////////
+1)) select * from latest_videos limit 50;
+    select * from videos where video_id=?;
+    
+ 2)  select * from   
+              
+ 
